@@ -115,3 +115,4 @@ build.ps1 — Script de compilación a .exe
 config.json — Archivo de configuración local
 
 🎨 Diseño e identidad: Estilo visual inspirado en la interfaz del cliente Steam Clásico mediante estilos en PySide6 (theme.qss en verde oliva). No se incluye ningún logo, icono o marca registrada de Valve Corporation
+
