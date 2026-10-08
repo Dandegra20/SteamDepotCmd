@@ -12,6 +12,7 @@ DEFAULTS = {
     "default_os": "windows",
     "default_language": "spanish",
     "last_appid": "",
+    "theme": "steam",          # estilo visual (ver gui/themes)
 }
 
 

@@ -8,20 +8,16 @@ from __future__ import annotations
 from pathlib import Path
 
 from PySide6.QtCore import Qt, QThread, QTimer, Signal
-from PySide6.QtGui import QAction, QColor, QFont, QGuiApplication
+from PySide6.QtGui import QAction, QFont, QGuiApplication
 from PySide6.QtWidgets import (
-    QAbstractItemView, QComboBox, QFileDialog, QFrame, QGroupBox, QHBoxLayout,
+    QAbstractItemView, QApplication, QComboBox, QFileDialog, QFrame, QGroupBox, QHBoxLayout,
     QHeaderView, QLabel, QLineEdit, QListWidget, QListWidgetItem, QMainWindow,
     QMessageBox, QPlainTextEdit, QProgressBar, QPushButton, QSizePolicy,
     QStatusBar, QTableWidget, QTableWidgetItem, QTabWidget, QVBoxLayout, QWidget,
 )
 
 from core import appinfo, cache, commands, config, depots, store_api
-
-COL_WHITE = QColor("#FFFFFF")
-COL_GOLD = QColor("#C4B550")
-COL_SECOND = QColor("#A0AA95")
-COL_WARN = QColor("#C9806E")          # unico tono fuera de paleta: avisa de falta de manifest
+from gui import themes
 
 OS_CHOICES = ["windows", "macos", "linux"]
 HEADERS = ["", "Depot", "Detalle", "Manifest (public)", "Tipo", "Tamano"]
@@ -83,6 +79,7 @@ class MainWindow(QMainWindow):
         self._search_worker: SearchWorker | None = None
         self._info_worker: AppInfoWorker | None = None
         self._rebuilding = False
+        self._theme = themes.get(self.cfg["theme"])   # ya aplicado en main.py
 
         self.setWindowTitle("Generador de comandos SteamCMD")
         self.resize(940, 720)   # cabe entera sobre la barra de tareas
@@ -367,6 +364,19 @@ class MainWindow(QMainWindow):
         r3.addStretch(1)
         bl.addLayout(r3)
 
+        r5 = QHBoxLayout()
+        r5.addWidget(QLabel("Estilo:"))
+        self.cmb_theme = QComboBox()
+        for t in themes.THEMES:
+            self.cmb_theme.addItem(t.name, t.key)
+        self.cmb_theme.currentIndexChanged.connect(self._preview_theme)
+        r5.addWidget(self.cmb_theme)
+        hint = QLabel("Se aplica al momento; pulsa Guardar ajustes para conservarlo.")
+        hint.setProperty("role", "secundario")
+        r5.addWidget(hint)
+        r5.addStretch(1)
+        bl.addLayout(r5)
+
         r4 = QHBoxLayout()
         r4.addStretch(1)
         btn_save_cfg = QPushButton("Guardar ajustes")
@@ -411,6 +421,9 @@ class MainWindow(QMainWindow):
             self.cmb_os_def.setCurrentText(self.cfg["default_os"])
             self.cmb_os.setCurrentText(self.cfg["default_os"])
         self.ed_lang_def.setText(self.cfg["default_language"])
+        self.cmb_theme.blockSignals(True)
+        self.cmb_theme.setCurrentIndex(max(0, self.cmb_theme.findData(self._theme.key)))
+        self.cmb_theme.blockSignals(False)
         if not self.cfg["steamcmd_path"]:
             self._status("Falta la ruta de steamcmd.exe: ponla en la pestana Ajustes.")
         else:
@@ -421,9 +434,14 @@ class MainWindow(QMainWindow):
         self.cfg["steam_user"] = self.ed_user.text().strip()
         self.cfg["default_os"] = self.cmb_os_def.currentText()
         self.cfg["default_language"] = self.ed_lang_def.text().strip().lower()
+        self.cfg["theme"] = self._theme.key
         path = config.save(self.cfg)
         self._status(f"Ajustes guardados en {path}")
         self._regenerate()
+
+    def _preview_theme(self, _index: int):
+        self._theme = themes.apply(QApplication.instance(), self.cmb_theme.currentData())
+        self._recolor_table()
 
     def _browse_steamcmd(self):
         start = self.ed_steamcmd.text().strip() or str(config.app_dir())
@@ -606,15 +624,7 @@ class MainWindow(QMainWindow):
                 d.kind,
                 depots.human_size(d.size),
             ]
-            if not d.has_public:
-                color = COL_WARN
-            elif d.kind == depots.KIND_DLC:
-                color = COL_GOLD
-            elif d.kind == depots.KIND_SHARED:
-                color = COL_SECOND
-            else:
-                color = COL_WHITE
-
+            color = self._row_color(d)
             for off, text in enumerate(values, start=1):
                 item = QTableWidgetItem(text)
                 item.setForeground(color)
@@ -625,6 +635,30 @@ class MainWindow(QMainWindow):
         self.tbl.setUpdatesEnabled(True)
         self._rebuilding = False
         self._regenerate()
+
+    def _row_color(self, d: depots.Depot):
+        if not d.has_public:
+            attr = "row_warn"
+        elif d.kind == depots.KIND_DLC:
+            attr = "row_dlc"
+        elif d.kind == depots.KIND_SHARED:
+            attr = "row_shared"
+        else:
+            attr = "row_normal"
+        return self._theme.color(attr)
+
+    def _recolor_table(self):
+        """Tras cambiar de estilo: solo repinta el texto, sin tocar las casillas."""
+        if not self.app_depots:
+            return
+        by_id = {d.depot_id: d for d in self.app_depots.depots}
+        for row in range(self.tbl.rowCount()):
+            depot = by_id.get(self.tbl.item(row, 0).data(Qt.UserRole))
+            if depot is None:
+                continue
+            color = self._row_color(depot)
+            for col in range(1, self.tbl.columnCount()):
+                self.tbl.item(row, col).setForeground(color)
 
     def _target_lang(self) -> str:
         lang = self.cmb_lang.currentText()
@@ -746,11 +780,3 @@ class MainWindow(QMainWindow):
 
     def _status_right(self, msg: str):
         self.lbl_status_right.setText(msg)
-
-
-def load_stylesheet() -> str:
-    qss = Path(__file__).resolve().parent / "theme.qss"
-    try:
-        return qss.read_text(encoding="utf-8")
-    except OSError:
-        return ""

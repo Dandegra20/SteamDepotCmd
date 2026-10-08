@@ -38,8 +38,10 @@ python main.py
 4. **Comandos** — un `download_depot` por línea con su comentario, y debajo la
    versión de una sola línea `steamcmd +login <usuario> ... +quit`.
    Botones **Copiar todo** y **Guardar .txt**.
-5. **Ajustes** — ruta de `steamcmd.exe`, usuario de Steam, SO e idioma por defecto.
-   Se guardan en `config.json`, junto al script o al `.exe`.
+5. **Ajustes** — ruta de `steamcmd.exe`, usuario de Steam, SO e idioma por defecto,
+   y el **estilo** visual: Steam clásico (verde oliva), Windows 7, Moderno redondeado
+   o ASCII (terminal). El estilo se aplica al momento al elegirlo.
+   Todo se guarda en `config.json`, junto al script o al `.exe`.
 
 **Manifest manual:** el campo de la pestaña Buscar sirve para bajar una versión
 antigua. Solo se aplica cuando hay **exactamente un depot marcado**; si hay varios
@@ -102,6 +104,7 @@ indica su ruta en la pestaña Ajustes.
 ```
 core/     lógica sin interfaz (vdf, appinfo, depots, commands, cache, config, store_api)
 gui/      main_window.py + theme.qss (skin verde oliva, todo dibujado con QSS)
+          themes/ los demás estilos: un .qss cada uno + la lista en __init__.py
 cli.py    la misma lógica probada por consola
 main.py   punto de entrada
 ```

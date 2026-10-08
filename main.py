@@ -3,10 +3,11 @@ from __future__ import annotations
 
 import sys
 
-from PySide6.QtGui import QFont
 from PySide6.QtWidgets import QApplication
 
-from gui.main_window import MainWindow, load_stylesheet
+from core import config
+from gui import themes
+from gui.main_window import MainWindow
 
 
 def main() -> int:
@@ -14,8 +15,7 @@ def main() -> int:
     # Fusion no redondea esquinas ni mete animaciones: deja mandar al QSS
     app.setStyle("Fusion")
     app.setApplicationName("Generador de comandos SteamCMD")
-    app.setFont(QFont("Tahoma", 8))
-    app.setStyleSheet(load_stylesheet())
+    themes.apply(app, config.load()["theme"])
 
     win = MainWindow()
     win.show()

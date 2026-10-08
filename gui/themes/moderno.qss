@@ -1,0 +1,428 @@
+/* ------------------------------------------------------------------
+   Moderno: oscuro y plano, esquinas redondeadas, tarjetas en vez de
+   marcos biselados y un unico color de acento.
+     fondo        #1E1F24      tarjetas       #26272E
+     campos       #17181C      borde          #363842
+     texto        #E6E7EB      secundario     #9A9CA6
+     acento       #4C8DFF
+   ------------------------------------------------------------------ */
+
+* {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 9pt;
+    outline: 0;
+}
+
+QWidget {
+    background-color: #1E1F24;
+    color: #E6E7EB;
+}
+
+QMainWindow, QDialog {
+    background-color: #1E1F24;
+}
+
+/* ---------- barra de menu ---------- */
+
+QMenuBar {
+    background-color: #1E1F24;
+    border-bottom: 1px solid #2E3038;
+    padding: 2px;
+}
+
+QMenuBar::item {
+    background: transparent;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+QMenuBar::item:selected {
+    background-color: #2E3038;
+}
+
+QMenu {
+    background-color: #26272E;
+    border: 1px solid #383A44;
+    padding: 4px;
+}
+
+QMenu::item {
+    padding: 6px 24px 6px 14px;
+    border-radius: 5px;
+    color: #E6E7EB;
+}
+
+QMenu::item:selected {
+    background-color: #4C8DFF;
+    color: #FFFFFF;
+}
+
+QMenu::item:disabled {
+    color: #6B6E7A;
+}
+
+QMenu::separator {
+    height: 1px;
+    background: #383A44;
+    margin: 4px 6px;
+}
+
+/* ---------- pestanas tipo pildora ---------- */
+
+QTabWidget::pane {
+    background: transparent;
+    border: 0;
+    top: 4px;
+}
+
+QTabWidget QStackedWidget, QTabWidget QStackedWidget > QWidget {
+    background: transparent;
+}
+
+QTabBar {
+    background: transparent;
+}
+
+QTabBar::tab {
+    background: transparent;
+    color: #9A9CA6;
+    border: 0;
+    border-radius: 8px;
+    padding: 5px 18px;
+    margin-right: 4px;
+    min-width: 62px;
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: #2B2D34;
+    color: #E6E7EB;
+}
+
+QTabBar::tab:selected {
+    background-color: #4C8DFF;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+/* ---------- tarjetas ---------- */
+
+QGroupBox {
+    background-color: #26272E;
+    border: 1px solid #33353E;
+    border-radius: 10px;
+    margin-top: 16px;
+    padding: 8px 8px 8px 8px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 6px;
+    padding: 0 4px 2px 4px;
+    color: #AFC8FF;
+    font-weight: bold;
+    background: transparent;
+}
+
+QLabel {
+    background: transparent;
+    color: #E6E7EB;
+}
+
+QLabel[role="secundario"] {
+    color: #9A9CA6;
+}
+
+QLabel[role="titulo"] {
+    color: #4C8DFF;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+/* ---------- botones ---------- */
+
+QPushButton {
+    background-color: #2E3038;
+    color: #E6E7EB;
+    border: 1px solid #3A3C46;
+    border-radius: 7px;
+    padding: 5px 16px;
+    min-height: 15px;
+}
+
+QPushButton:hover {
+    background-color: #383A44;
+    border-color: #4A4D59;
+}
+
+QPushButton:pressed {
+    background-color: #4C8DFF;
+    border-color: #4C8DFF;
+    color: #FFFFFF;
+}
+
+QPushButton:disabled {
+    background-color: #25262C;
+    color: #6B6E7A;
+    border-color: #2E3038;
+}
+
+QPushButton:default {
+    border-color: #4C8DFF;
+}
+
+/* ---------- campos y listas ---------- */
+
+QLineEdit, QPlainTextEdit, QTextEdit, QListWidget, QTableWidget, QTableView, QAbstractScrollArea {
+    background-color: #17181C;
+    color: #E6E7EB;
+    border: 1px solid #363842;
+    border-radius: 6px;
+    selection-background-color: #4C8DFF;
+    selection-color: #FFFFFF;
+}
+
+QLineEdit:focus, QPlainTextEdit:focus {
+    border-color: #4C8DFF;
+}
+
+QLineEdit, QPlainTextEdit, QTextEdit {
+    padding: 3px 6px;
+}
+
+QLineEdit:disabled, QPlainTextEdit:disabled {
+    color: #6B6E7A;
+    background-color: #202127;
+}
+
+QLineEdit[role="mono"], QPlainTextEdit[role="mono"] {
+    font-family: Consolas, "Cascadia Mono", "Lucida Console", monospace;
+    font-size: 9pt;
+}
+
+QListWidget {
+    padding: 3px;
+}
+
+QListWidget::item {
+    padding: 3px 6px;
+    border: 0;
+    border-radius: 5px;
+}
+
+QListWidget::item:hover:!selected {
+    background-color: #2B2D34;
+}
+
+QListWidget::item:selected {
+    background-color: #4C8DFF;
+    color: #FFFFFF;
+}
+
+/* ---------- tabla de depots ---------- */
+
+QTableView {
+    gridline-color: #24252B;
+    alternate-background-color: #1B1C21;
+}
+
+QTableView::item {
+    padding: 1px 4px;
+    border: 0;
+}
+
+QTableView::item:selected {
+    background-color: #2F4F86;
+    color: #FFFFFF;
+}
+
+QHeaderView {
+    background-color: transparent;
+    border: 0;
+}
+
+QHeaderView::section {
+    background-color: #26272E;
+    color: #9A9CA6;
+    padding: 5px 6px;
+    border: 0;
+    border-bottom: 1px solid #363842;
+    font-weight: bold;
+}
+
+QHeaderView::section:first {
+    border-top-left-radius: 6px;
+}
+
+QHeaderView::section:last {
+    border-top-right-radius: 6px;
+}
+
+QTableCornerButton::section {
+    background-color: #26272E;
+    border: 0;
+}
+
+/* ---------- casillas ---------- */
+
+QCheckBox, QRadioButton {
+    background: transparent;
+    color: #E6E7EB;
+    spacing: 6px;
+}
+
+QCheckBox::indicator, QTableView::indicator, QRadioButton::indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #17181C;
+    border: 1px solid #4A4D59;
+    border-radius: 4px;
+}
+
+QCheckBox::indicator:hover, QTableView::indicator:hover {
+    border-color: #4C8DFF;
+}
+
+QCheckBox::indicator:checked, QTableView::indicator:checked {
+    background-color: #4C8DFF;
+    border-color: #4C8DFF;
+}
+
+QCheckBox::indicator:disabled, QTableView::indicator:disabled {
+    background-color: #25262C;
+    border-color: #33353E;
+}
+
+/* ---------- desplegables ---------- */
+
+QComboBox {
+    background-color: #17181C;
+    color: #E6E7EB;
+    border: 1px solid #363842;
+    border-radius: 6px;
+    padding: 3px 8px;
+    min-width: 92px;
+    combobox-popup: 0;         /* lista normal: respeta las reglas ::item de abajo */
+}
+
+QComboBox:hover {
+    border-color: #4A4D59;
+}
+
+QComboBox:disabled {
+    color: #6B6E7A;
+}
+
+
+
+QComboBox QAbstractItemView {
+    background-color: #26272E;
+    border: 1px solid #383A44;
+    selection-background-color: #4C8DFF;
+    selection-color: #FFFFFF;
+    color: #E6E7EB;
+    padding: 2px;
+}
+
+/* opciones de la lista desplegable (con combobox-popup: 0; sin eso Qt resalta
+   con el fondo del desplegable, y el degradado de Windows 7 salia negro) */
+QComboBox QAbstractItemView::item {
+    padding: 4px 8px;
+    border: 0;
+}
+
+QComboBox QAbstractItemView::item:selected, QComboBox QAbstractItemView::item:hover {
+    background-color: #4C8DFF;
+    color: #FFFFFF;
+}
+
+/* ---------- barra de progreso fina ---------- */
+
+QProgressBar {
+    background-color: #17181C;
+    border: 0;
+    border-radius: 4px;
+    text-align: center;
+    color: #E6E7EB;
+    min-height: 8px;
+    max-height: 8px;
+}
+
+QProgressBar::chunk {
+    background-color: #4C8DFF;
+    border-radius: 4px;
+}
+
+/* ---------- barras de desplazamiento finas, sin flechas ---------- */
+
+QScrollBar:vertical {
+    background: transparent;
+    width: 10px;
+    margin: 2px;
+    border: 0;
+}
+
+QScrollBar:horizontal {
+    background: transparent;
+    height: 10px;
+    margin: 2px;
+    border: 0;
+}
+
+QScrollBar::handle:vertical, QScrollBar::handle:horizontal {
+    background-color: #3A3C46;
+    border-radius: 3px;
+    min-height: 24px;
+    min-width: 24px;
+}
+
+QScrollBar::handle:hover {
+    background-color: #4C4F5B;
+}
+
+QScrollBar::add-line, QScrollBar::sub-line {
+    width: 0;
+    height: 0;
+    border: 0;
+    background: none;
+}
+
+QScrollBar::add-page, QScrollBar::sub-page {
+    background: none;
+}
+
+/* ---------- barra de estado ---------- */
+
+QStatusBar {
+    background-color: #1E1F24;
+    color: #9A9CA6;
+    border-top: 1px solid #2E3038;
+}
+
+QStatusBar::item {
+    border: 0;
+}
+
+QStatusBar QLabel {
+    color: #9A9CA6;
+    padding: 2px 6px;
+}
+
+/* ---------- separadores y tooltips ---------- */
+
+QFrame[frameShape="4"], QFrame[frameShape="5"] {
+    background: #2E3038;
+    border: 0;
+    max-height: 1px;
+}
+
+QToolTip {
+    background-color: #26272E;
+    color: #E6E7EB;
+    border: 1px solid #383A44;
+    padding: 4px 6px;
+}
+
+QSplitter::handle {
+    background-color: #1E1F24;
+}

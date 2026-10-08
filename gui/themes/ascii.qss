@@ -1,0 +1,404 @@
+/* ------------------------------------------------------------------
+   ASCII: terminal de fosforo verde. Todo monoespaciado, bordes de
+   guiones como los marcos +----+, sin degradados ni esquinas, y la
+   seleccion en video inverso.
+     fondo        #050805      campos         #000000
+     texto        #8CF28C      tenue          #4FA84F
+     brillante    #CFFFCF      borde apagado  #2F6B2F
+   ------------------------------------------------------------------ */
+
+* {
+    font-family: Consolas, "Lucida Console", "Courier New", monospace;
+    font-size: 8pt;
+    outline: 0;
+}
+
+QWidget {
+    background-color: #050805;
+    color: #8CF28C;
+}
+
+QMainWindow, QDialog {
+    background-color: #050805;
+}
+
+/* ---------- barra de menu ---------- */
+
+QMenuBar {
+    background-color: #050805;
+    border-bottom: 1px dashed #4FA84F;
+    padding: 1px;
+}
+
+QMenuBar::item {
+    background: transparent;
+    padding: 3px 9px;
+    color: #8CF28C;
+}
+
+QMenuBar::item:selected {
+    background-color: #8CF28C;
+    color: #050805;
+}
+
+QMenu {
+    background-color: #050805;
+    border: 1px solid #8CF28C;
+    padding: 2px;
+}
+
+QMenu::item {
+    padding: 3px 24px 3px 14px;
+    color: #8CF28C;
+}
+
+QMenu::item:selected {
+    background-color: #8CF28C;
+    color: #050805;
+}
+
+QMenu::item:disabled {
+    color: #2F6B2F;
+}
+
+QMenu::separator {
+    height: 1px;
+    background: none;
+    border-top: 1px dashed #2F6B2F;
+    margin: 3px 4px;
+}
+
+/* ---------- pestanas ---------- */
+
+QTabWidget::pane {
+    background-color: #050805;
+    border: 1px dashed #4FA84F;
+    top: -1px;
+}
+
+QTabBar {
+    background: transparent;
+}
+
+QTabBar::tab {
+    background-color: #050805;
+    color: #4FA84F;
+    border: 1px dashed #4FA84F;
+    border-bottom: 0;
+    padding: 3px 14px;
+    margin-right: 3px;
+    min-width: 62px;
+}
+
+QTabBar::tab:selected {
+    background-color: #8CF28C;
+    color: #050805;
+    font-weight: bold;
+    border-style: solid;
+    border-color: #8CF28C;
+}
+
+QTabBar::tab:hover:!selected {
+    color: #CFFFCF;
+}
+
+/* ---------- marcos de grupo ---------- */
+
+QGroupBox {
+    background-color: #050805;
+    border: 1px dashed #4FA84F;
+    margin-top: 10px;
+    padding: 10px 7px 7px 7px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 7px;
+    padding: 0 4px;
+    color: #CFFFCF;
+    font-weight: bold;
+    background-color: #050805;
+}
+
+QLabel {
+    background: transparent;
+    color: #8CF28C;
+}
+
+QLabel[role="secundario"] {
+    color: #4FA84F;
+}
+
+QLabel[role="titulo"] {
+    color: #CFFFCF;
+    font-weight: bold;
+}
+
+/* ---------- botones ---------- */
+
+QPushButton {
+    background-color: #050805;
+    color: #8CF28C;
+    border: 1px solid #8CF28C;
+    padding: 3px 12px;
+    min-height: 15px;
+}
+
+QPushButton:hover {
+    background-color: #0F2A0F;
+    color: #CFFFCF;
+}
+
+QPushButton:pressed {
+    background-color: #8CF28C;
+    color: #050805;
+}
+
+QPushButton:disabled {
+    color: #2F6B2F;
+    border: 1px dashed #2F6B2F;
+}
+
+QPushButton:default {
+    color: #CFFFCF;
+}
+
+/* ---------- campos y listas ---------- */
+
+QLineEdit, QPlainTextEdit, QTextEdit, QListWidget, QTableWidget, QTableView, QAbstractScrollArea {
+    background-color: #000000;
+    color: #8CF28C;
+    border: 1px solid #2F6B2F;
+    selection-background-color: #8CF28C;
+    selection-color: #000000;
+}
+
+QLineEdit:focus, QPlainTextEdit:focus {
+    border-color: #8CF28C;
+}
+
+QLineEdit, QPlainTextEdit, QTextEdit {
+    padding: 2px 3px;
+}
+
+QLineEdit:disabled, QPlainTextEdit:disabled {
+    color: #2F6B2F;
+    background-color: #050805;
+}
+
+QLineEdit[role="mono"], QPlainTextEdit[role="mono"] {
+    font-family: Consolas, "Lucida Console", monospace;
+    font-size: 8pt;
+}
+
+QListWidget::item {
+    padding: 1px 3px;
+    border: 0;
+}
+
+QListWidget::item:hover:!selected {
+    background-color: #0F2A0F;
+}
+
+QListWidget::item:selected {
+    background-color: #8CF28C;
+    color: #000000;
+}
+
+/* ---------- tabla de depots ---------- */
+
+QTableView {
+    gridline-color: #1A3A1A;
+    alternate-background-color: #081208;
+}
+
+QTableView::item {
+    padding: 1px 4px;
+    border: 0;
+}
+
+QTableView::item:selected {
+    background-color: #8CF28C;
+    color: #000000;
+}
+
+QHeaderView {
+    background-color: #000000;
+    border: 0;
+}
+
+QHeaderView::section {
+    background-color: #000000;
+    color: #CFFFCF;
+    padding: 3px 5px;
+    border: 0;
+    border-right: 1px dashed #2F6B2F;
+    border-bottom: 1px dashed #4FA84F;
+    font-weight: bold;
+}
+
+QTableCornerButton::section {
+    background-color: #000000;
+    border: 0;
+}
+
+/* ---------- casillas ---------- */
+
+QCheckBox, QRadioButton {
+    background: transparent;
+    color: #8CF28C;
+    spacing: 5px;
+}
+
+QCheckBox::indicator, QTableView::indicator, QRadioButton::indicator {
+    width: 11px;
+    height: 11px;
+    background-color: #000000;
+    border: 1px solid #4FA84F;
+}
+
+QCheckBox::indicator:checked, QTableView::indicator:checked {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #8CF28C, stop:1 #8CF28C);
+    border: 1px solid #8CF28C;
+}
+
+QCheckBox::indicator:disabled, QTableView::indicator:disabled {
+    background-color: #050805;
+    border: 1px dashed #1A3A1A;
+}
+
+/* ---------- desplegables ---------- */
+
+QComboBox {
+    background-color: #000000;
+    color: #8CF28C;
+    border: 1px solid #2F6B2F;
+    padding: 2px 3px;
+    min-width: 92px;
+    combobox-popup: 0;         /* lista normal: respeta las reglas ::item de abajo */
+}
+
+QComboBox:hover {
+    border-color: #8CF28C;
+}
+
+QComboBox:disabled {
+    color: #2F6B2F;
+}
+
+
+
+QComboBox QAbstractItemView {
+    background-color: #000000;
+    border: 1px solid #8CF28C;
+    selection-background-color: #8CF28C;
+    selection-color: #000000;
+    color: #8CF28C;
+}
+
+/* opciones de la lista desplegable (con combobox-popup: 0; sin eso Qt resalta
+   con el fondo del desplegable, y el degradado de Windows 7 salia negro) */
+QComboBox QAbstractItemView::item {
+    padding: 1px 4px;
+    border: 0;
+}
+
+QComboBox QAbstractItemView::item:selected, QComboBox QAbstractItemView::item:hover {
+    background-color: #8CF28C;
+    color: #000000;
+}
+
+/* ---------- barra de progreso a bloques ---------- */
+
+QProgressBar {
+    background-color: #000000;
+    border: 1px solid #2F6B2F;
+    text-align: center;
+    color: #8CF28C;
+    min-height: 15px;
+    max-height: 15px;
+}
+
+QProgressBar::chunk {
+    background-color: #8CF28C;
+    width: 8px;
+    margin: 2px 1px;
+}
+
+/* ---------- barras de desplazamiento ---------- */
+
+QScrollBar:vertical {
+    background-color: #000000;
+    width: 12px;
+    border: 0;
+    border-left: 1px dashed #2F6B2F;
+    margin: 0;
+}
+
+QScrollBar:horizontal {
+    background-color: #000000;
+    height: 12px;
+    border: 0;
+    border-top: 1px dashed #2F6B2F;
+    margin: 0;
+}
+
+QScrollBar::handle:vertical, QScrollBar::handle:horizontal {
+    background-color: #2F6B2F;
+    min-height: 18px;
+    min-width: 18px;
+    margin: 2px;
+}
+
+QScrollBar::handle:hover {
+    background-color: #4FA84F;
+}
+
+QScrollBar::add-line, QScrollBar::sub-line {
+    width: 0;
+    height: 0;
+    border: 0;
+    background: none;
+}
+
+QScrollBar::add-page, QScrollBar::sub-page {
+    background: none;
+}
+
+/* ---------- barra de estado ---------- */
+
+QStatusBar {
+    background-color: #050805;
+    color: #4FA84F;
+    border-top: 1px dashed #4FA84F;
+}
+
+QStatusBar::item {
+    border: 0;
+}
+
+QStatusBar QLabel {
+    color: #4FA84F;
+    padding: 1px 4px;
+}
+
+/* ---------- separadores y tooltips ---------- */
+
+QFrame[frameShape="4"], QFrame[frameShape="5"] {
+    background: none;
+    border: 0;
+    border-bottom: 1px dashed #4FA84F;
+    max-height: 1px;
+}
+
+QToolTip {
+    background-color: #000000;
+    color: #8CF28C;
+    border: 1px solid #8CF28C;
+    padding: 2px 4px;
+}
+
+QSplitter::handle {
+    background-color: #050805;
+}

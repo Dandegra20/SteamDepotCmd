@@ -41,7 +41,7 @@ def _keep(entry) -> bool:
 
 a = Analysis(
     ["main.py"],
-    datas=[("gui/theme.qss", "gui")],
+    datas=[("gui/theme.qss", "gui"), ("gui/themes/*.qss", "gui/themes")],
     excludes=[
         "tkinter", "unittest", "pydoc", "doctest", "pdb", "sqlite3",
         "PySide6.QtNetwork", "PySide6.QtSvg", "PySide6.QtOpenGL",
